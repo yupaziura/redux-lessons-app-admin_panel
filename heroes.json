@@ -7,23 +7,55 @@
       "element": "fire"
     },
     {
-      "id": 2,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
       "id": 3,
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
+    },
+    {
+      "id": "92a16469-3d11-465f-a387-ffcf1abd5039",
+      "name": "a",
+      "description": "a",
+      "element": "wind"
+    },
+    {
+      "id": "73acad8c-5ecc-46e7-9ca5-20b469e021ef",
+      "name": "s",
+      "description": "s",
+      "element": "earth"
+    },
+    {
+      "id": "46719aab-13a1-4a09-a737-b5170b7c2730",
+      "name": "f",
+      "description": "f",
+      "element": "wind"
     }
   ],
   "filters": [
-    "all",
-    "fire",
-    "water",
-    "wind",
-    "earth"
+    {
+      "name": "All",
+      "value": "all",
+      "classCSS": "btn-outline-dark"
+    },
+    {
+      "name": "Fire",
+      "value": "fire",
+      "classCSS": "btn-danger"
+    },
+    {
+      "name": "Water",
+      "value": "water",
+      "classCSS": "btn-primary"
+    },
+    {
+      "name": "Wind",
+      "value": "wind",
+      "classCSS": "btn-success"
+    },
+    {
+      "name": "Earth",
+      "value": "earth",
+      "classCSS": "btn-secondary"
+    }
   ]
 }
