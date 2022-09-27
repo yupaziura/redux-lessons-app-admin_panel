@@ -25,23 +25,32 @@ const HeroesList = () => {
         // eslint-disable-next-line
     }, []);
 
+    const deleteElement = (id) => {
+        const newArray = heroes.filter((i)=> {
+            return id !== i.id
+        })
+        request(`http://localhost:3001/heroes/${id}`, "DELETE")
+            .then(()=> dispatch(heroesFetched(newArray)))
+            .catch(()=> dispatch(heroesFetchingError()))
+    }
+
     if (heroesLoadingStatus === "loading") {
         return <Spinner/>;
     } else if (heroesLoadingStatus === "error") {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
-    const renderHeroesList = (arr) => {
+    const renderHeroesList = (arr, deleteElement) => {
         if (arr.length === 0) {
             return <h5 className="text-center mt-5">Героев пока нет</h5>
         }
 
-        return arr.map(({id, ...props}) => {
-            return <HeroesListItem key={id} {...props}/>
+        return arr.map(({...props}) => {
+            return <HeroesListItem key={props.id} {...props} deleteElement={deleteElement}/>
         })
     }
 
-    const elements = renderHeroesList(heroes);
+    const elements = renderHeroesList(heroes, deleteElement);
     return (
         <ul>
             {elements}
