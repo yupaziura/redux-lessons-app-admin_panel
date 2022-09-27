@@ -7,55 +7,43 @@
       "element": "fire"
     },
     {
-      "id": 3,
-      "name": "Морской герой",
-      "description": "Как аквамен, но не из DC",
+      "id": 2,
+      "name": "Неизвестный герой",
+      "description": "Скрывающийся в тени",
+      "element": "wind"
+    },
+    {
+      "id": "45ffa9c1-963a-49b9-8e6a-7a274b2642c5",
+      "name": "1",
+      "description": "1",
       "element": "water"
-    },
-    {
-      "id": "92a16469-3d11-465f-a387-ffcf1abd5039",
-      "name": "a",
-      "description": "a",
-      "element": "wind"
-    },
-    {
-      "id": "73acad8c-5ecc-46e7-9ca5-20b469e021ef",
-      "name": "s",
-      "description": "s",
-      "element": "earth"
-    },
-    {
-      "id": "46719aab-13a1-4a09-a737-b5170b7c2730",
-      "name": "f",
-      "description": "f",
-      "element": "wind"
     }
   ],
   "filters": [
     {
-      "name": "All",
-      "value": "all",
-      "classCSS": "btn-outline-dark"
+      "name": "all",
+      "label": "Все",
+      "className": "btn-outline-dark"
     },
     {
-      "name": "Fire",
-      "value": "fire",
-      "classCSS": "btn-danger"
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn-danger"
     },
     {
-      "name": "Water",
-      "value": "water",
-      "classCSS": "btn-primary"
+      "name": "water",
+      "label": "Вода",
+      "className": "btn-primary"
     },
     {
-      "name": "Wind",
-      "value": "wind",
-      "classCSS": "btn-success"
+      "name": "wind",
+      "label": "Ветер",
+      "className": "btn-success"
     },
     {
-      "name": "Earth",
-      "value": "earth",
-      "classCSS": "btn-secondary"
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn-secondary"
     }
   ]
 }
