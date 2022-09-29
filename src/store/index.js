@@ -1,6 +1,17 @@
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, combineReducers, compose , applyMiddleware} from 'redux';
 import heroes from '../reducers/heroes';
 import filters from '../reducers/filters';
+
+
+
+const stringMiddleware = (store) => (dispatch) => (action) => {
+    if (typeof action === 'string') {
+        return dispatch({
+            type:action
+        })
+    }
+    else dispatch(action)
+}
 
 
 // усиление стора
@@ -32,8 +43,13 @@ const store = createStore(
     // we want our extension for google work too
     // but we have to pass code as a 2d argument too
     // so we can use a compose
+    // compose(
+    //     enchencer,
+    //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    // )
+
     compose(
-        enchencer,
+        applyMiddleware(stringMiddleware),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
     );
