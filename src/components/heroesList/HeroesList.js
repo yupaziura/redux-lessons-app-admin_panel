@@ -2,6 +2,7 @@ import {useHttp} from '../../hooks/http.hook';
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
+import {createSelector} from 'reselect';
 
 import { heroesFetching, heroesFetched, heroesFetchingError, heroDeleted } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
@@ -15,7 +16,37 @@ import Spinner from '../spinner/Spinner';
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-    const {filteredHeroes, heroesLoadingStatus} = useSelector(state => state);
+
+    const filteredHeroesSelector = createSelector(
+        (state)=> state.filters.activeFilter,
+        (state) => state.heroes.heroes,
+        (filter, heroes) => {
+            if(filter === 'all') {
+                return heroes
+            } 
+            else {
+                return heroes.filter(item => item.element === filter)
+            }     
+        }
+    );
+
+    // we can do some manipulations with data inside useSelect
+    // const filteredHeroes = useSelector(state => {
+    //     // but this method has some issues with optimisation
+    //     // it will rerender component even if filter will be the same
+    //     // so we shoult memoised value 
+    //     // ese reselect lib for it
+    //     if(state.filters.activeFilter === 'all') {
+    //         return state.heroes.heroes
+    //     } 
+    //     else {
+    //         return state.heroes.heroes.filter(item => item.element === state.filters.activeFilter)
+    //     }
+    // })
+
+    // now we can just pass function that we created in useSelector
+    const filteredHeroes = useSelector(filteredHeroesSelector);
+    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
