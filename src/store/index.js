@@ -2,6 +2,7 @@ import { createStore, combineReducers, compose , applyMiddleware} from 'redux';
 import heroes from '../reducers/heroes';
 import filters from '../reducers/filters';
 import ReduxThunk from 'redux-thunk';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 
 
@@ -36,24 +37,33 @@ const stringMiddleware = (store) => (dispatch) => (action) => {
 //     return store;
 // }
 
-const store = createStore(
-    // use combine reducers to combine them
-    // pass object in it
-    combineReducers({heroes, filters})
-    , 
-    // we want our extension for google work too
-    // but we have to pass code as a 2d argument too
-    // so we can use a compose
-    // compose(
-    //     enchencer,
-    //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    // )
+// const store = createStore(
+//     // use combine reducers to combine them
+//     // pass object in it
+//     combineReducers({heroes, filters})
+//     , 
+//     // we want our extension for google work too
+//     // but we have to pass code as a 2d argument too
+//     // so we can use a compose
+//     // compose(
+//     //     enchencer,
+//     //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     // )
 
-    compose(
-        applyMiddleware(ReduxThunk, stringMiddleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-    );
+//     compose(
+//         applyMiddleware(ReduxThunk, stringMiddleware),
+//         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     )
+//     );
+
+
+// now we can create create store with configureStore
+// it is easier way to set middleware, reducers and turn on redux dev tool
+const store = configureStore({
+    reducer: {heroes, filters},
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware),
+    devTools: process.env.NODE_ENV !== 'production',
+})
 
 export default store;
 
