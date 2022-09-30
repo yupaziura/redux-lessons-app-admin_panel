@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose , applyMiddleware} from 'redux';
 import heroes from '../reducers/heroes';
 import filters from '../reducers/filters';
+import ReduxThunk from 'redux-thunk';
 
 
 
@@ -20,20 +21,20 @@ const stringMiddleware = (store) => (dispatch) => (action) => {
 
 // bu if we want to change ony dispatch
 // we will use a middleware
-const enchencer = (createStore)=>(...args) => {
-    const store = createStore(...args);
+// const enchencer = (createStore)=>(...args) => {
+//     const store = createStore(...args);
 
-    const oldDispatch = store.dispatch;
-    store.dispatch = (action) => {
-        if (typeof action === 'string') {
-            return oldDispatch({
-                type:action
-            })
-        }
-        else oldDispatch(action)
-    }
-    return store;
-}
+//     const oldDispatch = store.dispatch;
+//     store.dispatch = (action) => {
+//         if (typeof action === 'string') {
+//             return oldDispatch({
+//                 type:action
+//             })
+//         }
+//         else oldDispatch(action)
+//     }
+//     return store;
+// }
 
 const store = createStore(
     // use combine reducers to combine them
@@ -49,7 +50,7 @@ const store = createStore(
     // )
 
     compose(
-        applyMiddleware(stringMiddleware),
+        applyMiddleware(ReduxThunk, stringMiddleware),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
     );
