@@ -2,6 +2,7 @@
 // because we get the dispath function from thunk
 
 import { heroesFetching, heroesFetched, heroesFetchingError} from "../components/heroesList/heroesSlice";
+import {filtersFetching, filtersFetched, filtersFetchingError} from '../components/heroesFilters/filtersSlice';
 
 
 export const fetchHeroes = (request) => (dispatch) => {
@@ -21,31 +22,3 @@ export const fetchFilters = (request) => (dispatch) => {
 }
 
 
-export const filtersFetching = () => {
-    return {
-        type: 'FILTERS_FETCHING'
-    }
-}
-
-export const filtersFetched = (filters) => {
-    return {
-        type: 'FILTERS_FETCHED',
-        payload: filters
-    }
-}
-
-export const filtersFetchingError = () => {
-    return {
-        type: 'FILTERS_FETCHING_ERROR'
-    }
-}
-
-// with thunk we can return not only object, but function
-// dispatch will come from thunk
-
-export const activeFilterChanged = (filter)  => {
-    return {
-        type: 'ACTIVE_FILTER_CHANGED',
-        payload: filter
-    }
-}
